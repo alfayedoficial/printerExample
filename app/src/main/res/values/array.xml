@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string-array name="barcode_tag">
+        <item>Barcode</item>
+        <item>QRCode</item>
+    </string-array>
+
+    <string-array name="barcode_item_esc">
+        <item>Barcode</item>
+        <item>UPC-A</item>
+        <!--<item>UPC-E</item>-->
+        <item>EAN13</item>
+        <item>EAN8</item>
+        <item>CODE39</item>
+        <item>ITF</item>
+        <item>CODABAR</item>
+        <!--<item>CODE93</item>-->
+        <item>CODE128</item>
+        <item>QRCode</item>
+        <item>QRcode</item>
+    </string-array>
+    <string-array name="barcode_item_label">
+        <item>Barcode</item>
+        <item>UPC-A</item>
+        <!--<item>UPC-E</item>-->
+        <item>EAN13</item>
+        <item>EAN8</item>
+        <item>CODE39</item>
+        <item>ITF</item>
+        <item>CODABAR</item>
+        <!--<item>CODE93</item>-->
+        <item>CODE128</item>
+        <item>QRCode</item>
+        <item>QRcode</item>
+    </string-array>
+    <string-array name="barcode_item_label_zpl">
+        <item>Barcode</item>
+        <item>UPC-A</item>
+        <!--<item>UPC-E</item>-->
+        <item>EAN13</item>
+        <item>EAN8</item>
+        <item>CODE39</item>
+        <item>CODABAR</item>
+        <!--<item>CODE93</item>-->
+        <item>CODE128</item>
+        <item>QRCode</item>
+        <item>QRcode</item>
+    </string-array>
+
+    <integer-array name="indicator_color">
+        <item>@color/tag_blue_bg</item>
+        <item>@color/tag_orange_bg</item>
+        <item>@color/tag_red_bg</item>
+        <item>@color/tag_green_bg</item>
+        <item>@color/tag_blue_light_bg</item>
+    </integer-array>
+    <string-array name="font_type_esc">
+        <item>@string/spin_default_esc_font</item>
+        <item>Font-A</item>
+        <item>Font-B</item>
+        <item>Font-C</item>
+        <item>Font-D</item>
+    </string-array>
+
+
+    <string-array name="label_setting_Type" tools:ignore="MissingTranslation">
+        <!--<item>TSC</item>-->
+        <item>CPCL</item>
+        <!--<item>ZPL</item>-->
+    </string-array>
+
+    <string-array name="label_setting_jx" tools:ignore="MissingTranslation">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="label_setting_sd" tools:ignore="MissingTranslation">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="label_setting_size" tools:ignore="MissingTranslation">
+        <item>80*40</item>
+        <item>80*60</item>
+        <item>80*80</item>
+        <item>80*100</item>
+        <item>80*200</item>
+        <item>80*300</item>
+        <item>20*10</item>
+        <item>25*10</item>
+        <item>25*15</item>
+        <item>25*20</item>
+        <item>30*15</item>
+        <item>30*20</item>
+        <item>30*25</item>
+        <item>30*30</item>
+        <item>30*55</item>
+        <item>30*70</item>
+        <item>30*80</item>
+        <item>30*90</item>
+        <item>35*20</item>
+        <item>35*25</item>
+        <item>35*30</item>
+        <item>35*45</item>
+        <item>40*20</item>
+        <item>40*25</item>
+        <item>40*30</item>
+        <item>40*35</item>
+        <item>40*40</item>
+        <item>40*50</item>
+        <item>40*60</item>
+        <item>40*70</item>
+        <item>40*80</item>
+        <item>40*90</item>
+        <item>40*100</item>
+        <item>50*15</item>
+        <item>50*15</item>
+        <item>50*15</item>
+        <item>50*25</item>
+        <item>50*30</item>
+        <item>50*35</item>
+        <item>50*40</item>
+        <item>50*45</item>
+        <item>50*60</item>
+        <item>50*70</item>
+        <item>50*80</item>
+        <item>50*90</item>
+        <item>55*50</item>
+        <item>60*30</item>
+        <item>60*40</item>
+        <item>60*50</item>
+        <item>60*60</item>
+        <item>60*80</item>
+    </string-array>
+</resources>

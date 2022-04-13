@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.printer.example"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('release.apk')) {
+                        def timeStamp = new Date().format('yyyy.MM.dd_HHmm');
+                        def fileName = "PrinterExample_standard_v${defaultConfig.versionName}" + "_" + timeStamp + ".apk";
+                        output.outputFile = file("${outputFile.parent}/${fileName}")
+                    }
+                }
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/printer_library.jar')
+
+    // MultiDexApplication
+    def multidex_Version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_Version"
+
+    implementation 'com.google.zxing:core:3.4.1'
+    implementation 'com.pixelcarrot.base64image:base64image:1.0.0'
+
+}

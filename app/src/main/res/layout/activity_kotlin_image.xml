@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.printer.example.activity.KotlinImageActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.KotlinImageActivity">
+
+
+        <EditText
+            android:id="@+id/etxtBarCode"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="barCode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/mgBarCode"
+            android:layout_width="242dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/etxtBarCode"
+            app:layout_constraintStart_toStartOf="@+id/etxtBarCode"
+            app:layout_constraintTop_toBottomOf="@+id/etxtBarCode"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/mgBarCode2"
+            android:layout_width="342dp"
+            android:layout_height="150dp"
+            app:layout_constraintEnd_toEndOf="@+id/etxtBarCode"
+            app:layout_constraintStart_toStartOf="@+id/etxtBarCode"
+            app:layout_constraintTop_toBottomOf="@+id/tnGenerate"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/tnGenerate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Generate"
+            android:onClick="@{()->activity.generate(etxtBarCode.getText().toString())}"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/mgBarCode"
+            app:layout_constraintStart_toStartOf="@+id/mgBarCode"
+            app:layout_constraintTop_toBottomOf="@+id/mgBarCode" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/etxtBarCode"
+            app:layout_constraintEnd_toEndOf="@+id/etxtBarCode"
+            app:layout_constraintStart_toStartOf="@+id/etxtBarCode">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:gravity="center|center_vertical"
+                android:text="@string/bmp_limit_width" />
+
+            <EditText
+                android:id="@+id/etPicWidth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="Limit width in mm"
+                android:inputType="numberDecimal"
+                android:maxLength="3"
+                android:text="40" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

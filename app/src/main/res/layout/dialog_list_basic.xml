@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dialog_list_basic_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:padding="16dp"
+        android:textColor="@color/orange_color"
+        android:textSize="18sp" />
+
+    <ListView
+        android:id="@+id/lv_dialog_list_basic_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/stroke_gray_color"
+        android:dividerHeight="1dp"/>
+
+
+</LinearLayout>

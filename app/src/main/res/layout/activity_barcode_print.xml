@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        style="@style/Title">
+
+        <include
+            android:id="@+id/back"
+            layout="@layout/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            style="@style/BaseTitleText.White"
+            android:text="@string/barcode_print" />
+
+        <TextView
+            android:id="@+id/connect_state"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:paddingRight="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_barcodetype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/UPC_A"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/et_barcode_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:hint="barcode content"
+        android:lines="1" />
+
+    <TextView
+        android:id="@+id/tv_error_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center_vertical|right"
+        android:text="字符数：14"
+        android:textColor="@color/red"
+        android:textSize="12sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_print_barcode_orientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_print_barcode_orientation_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="rotate_left" />
+
+        <RadioButton
+            android:id="@+id/rb_print_barcode_orientation_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="nomal" />
+
+        <RadioButton
+            android:id="@+id/rb_print_barcode_orientation_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rotate_right" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/ck_show_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="show barcode text"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_print"
+        style="@style/BaseButton"
+        android:layout_marginBottom="64dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text="@string/print" />
+
+
+</LinearLayout>
+

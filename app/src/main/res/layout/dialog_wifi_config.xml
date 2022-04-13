@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/et_wifi_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="0.0.0.0"
+        android:inputType="numberDecimal"
+        android:digits="01234567890."
+        android:maxLength="15"
+        />
+
+    <EditText
+        android:id="@+id/et_wifi_port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:hint="port"
+        android:lines="1"
+        android:maxLength="5"
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:text="9100" />
+
+
+</LinearLayout>

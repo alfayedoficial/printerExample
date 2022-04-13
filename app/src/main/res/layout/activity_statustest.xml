@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".activity.StatusTestActivity"
+    >
+
+  <Button
+    android:id="@+id/btn_connectStatus"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:text="@string/status_Connect"
+    android:onClick="onBtnClick"
+    android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/btn_Opencover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="开盖测试"
+        android:onClick="onBtnClick"/>
+
+    <Button
+        android:id="@+id/btn_Exhausted_paper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="纸用尽"
+        android:onClick="onBtnClick"/>
+
+    <Button
+        android:id="@+id/btn_Other_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="其他错误"
+        android:onClick="onBtnClick"/>
+    <Button
+        android:id="@+id/btn_Outpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="缺纸"
+        android:onClick="onBtnClick"/>
+
+  <Button
+    android:id="@+id/btn_IsPrinting"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:text="@string/status_IsPrint"
+    android:onClick="onBtnClick"
+    android:visibility="visible"/>
+
+</LinearLayout>

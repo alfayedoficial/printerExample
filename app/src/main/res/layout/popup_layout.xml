@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/ten"
+    android:background="@color/transpotblack"
+    android:gravity="center" >
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:background="@color/white" >
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="horizontal"
+	    	android:background="@color/main"
+	    	android:paddingTop="@dimen/ten"
+	    	android:paddingBottom="@dimen/ten"
+	    	android:paddingLeft="@dimen/ten"
+	    	android:gravity="center_vertical">
+	        <TextView android:id="@+id/popup_layout_title"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/label_size"
+	            android:textColor="@color/white"
+	            android:textSize="@dimen/twenty"/>
+	    </LinearLayout>
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="vertical"
+	    	android:background="@color/white">
+	        <ListView android:id="@+id/popup_layout_listview"
+		        android:layout_width="fill_parent"
+		        android:layout_height="200dp"
+		      	android:scrollbars="vertical"
+		        android:divider="@color/gray2"
+		        android:dividerHeight="0.5dp"
+		        android:cacheColorHint="@color/transpot">
+	    	</ListView>
+	    	
+	    </LinearLayout>
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:background="@color/gray2"
+	    	android:paddingTop="@dimen/ten"
+	    	android:paddingBottom="@dimen/ten"
+	    	android:paddingRight="@dimen/ten">
+	        <TextView android:id="@+id/popup_layout_quxiao"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/dialog_cancel"
+	            android:textColor="@color/maint"
+	            android:textSize="@dimen/eighteen"
+	            android:layout_alignParentRight="true"
+	            android:layout_centerVertical="true"/>
+	    </RelativeLayout>
+	</LinearLayout>
+</LinearLayout>

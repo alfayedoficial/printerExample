@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.printer.example.activity.CmdTestActivity">
+
+        <TextView
+            android:id="@+id/tv_rev"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/btn_clear_rev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="Clear Rev" />
+
+        <EditText
+            android:id="@+id/et_send"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="left"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/btn_clear_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:padding="10dp"
+            android:text="Clear Send" />
+
+        <RadioGroup
+            android:id="@+id/rg_sendtype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp">
+
+            <RadioButton
+                android:id="@+id/rb_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="TEXT" />
+
+            <RadioButton
+                android:id="@+id/rb_hex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="HEX" />
+
+        </RadioGroup>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_read"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="2"
+                android:padding="10dp"
+                android:text="READ" />
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="SEND" />
+
+        </TableRow>
+
+        <Button
+            android:id="@+id/btn_send2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="SEND_03FF"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

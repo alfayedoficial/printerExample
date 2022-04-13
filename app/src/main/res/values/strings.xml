@@ -1,0 +1,151 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">PrinterExample</string>
+
+    <!--Public Value start-->
+    <string name="UPC_A">UPC-A</string>
+    <string name="UPC_E">UPC-E</string>
+    <string name="EAN13">EAN13</string>
+    <string name="EAN14">EAN14</string>
+    <string name="GS1">GS1</string>
+    <string name="EAN8">EAN8</string>
+    <string name="CODE39">CODE39</string>
+    <string name="ITF">ITF</string>
+    <string name="CODABAR">CODABAR</string>
+    <string name="CODE93">CODE93</string>
+    <string name="CODE128">CODE128</string>
+    <string name="QR_CODE">QRcode</string>
+    <!--Public Value   end-->
+
+    <string name="cmdtype_esc">ESC</string>
+    <string name="cmdtype_tsc">TSC</string>
+    <string name="cmdtype_cpcl">CPCL</string>
+    <string name="cmdtype_zpl">ZPL</string>
+    <string name="cmdtype_pin">PIN</string>
+    <string name="command_type">Command Type:</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="connect">Connect</string>
+    <string name="text_print">Text Print</string>
+    <string name="image_print">Image Print</string>
+    <string name="self_test_print">Test Page Print</string>
+
+    <string name="upload_image">Upload Image</string>
+    <string name="print">Print</string>
+    <string name="picture">Photograph</string>
+    <string name="album">Album</string>
+    <string name="choose_picture_position">Image Position</string>
+    <string name="tip_upload_image">No image,Firstly Upload a image</string>
+    <string name="insert_sdcard_tip">Please Insert SDCard</string>
+    <string name="please_connect">Click to connect a device</string>
+    <string name="connect_type">Connect Type:</string>
+    <string name="template_1">Template 1</string>
+    <string name="template_2">Template 2</string>
+    <string name="template_3">Template 3</string>
+    <string name="template_4">Template 4</string>
+    <string name="template_print">Template Print</string>
+
+    <string name="choose_bluetooth_device">Choose Bluetooth Device</string>
+    <string name="paired_devices">Paired</string>
+    <string name="tip_have_no_paired_device">No paired device</string>
+    <string name="tip_have_no_found_bluetooth_device">No Device</string>
+    <string name="search_device">Search</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_tip">Tip</string>
+    <string name="main_pls_choose_device">Please choose a device</string>
+    <string name="dialog_back">Back</string>
+    <string name="main_discon_click_repeatedly">Device has been disconnected, no need to click repeatedly</string>
+    <string name="barcode_print">Barcode Print</string>
+    <string name="headbar_back">Back</string>
+    <string name="title_barcode">Barcode</string>
+    <string name="title_activity_barcode_print">BarcodePrintActivity</string>
+    <string name="_main_connected">-connect success</string>
+    <string name="_main_connected_fail">connect fail</string>
+    <string name="_main_disconnect">disconnected</string>
+
+    <string name="tip_barcode_text_UPC_A">Character number：11,Range:0~9,Automatic Check</string>
+    <string name="tip_barcode_text_UPC_E">Character Number: 6,Range:0~9, Automatic Check</string>
+    <string name="tip_barcode_text_EAN13">Character Number: 12,Range:0~9, Automatic Check</string>
+    <string name="tip_barcode_text_EAN8">Character Number: 7, Range: 0~9, Automatic Check</string>
+    <string name="tip_barcode_text_CODE39">Character number: 1~30, range: 0-9, A~Z, space,\"$\",\"%\",\"+\",\"-\",\".\",\"/\"</string>
+    <string name="tip_barcode_text_ITF">The Number Of Characters: Less Than 30 (Even), range: 0-9</string>
+    <string name="tip_barcode_text_CODABAR">The number of characters: 1-30, range: 0-9, A-D, "$\", "\ + \", \ "-\", \ ". \", \ "/ \", \ ": \", A-D only start to coincide and terminator</string>
+    <string name="tip_barcode_text_CODE93">The number of characters：1-30，range：0-9、A-D、\"$\"、\"+\"、\"-\"、\".\"、\"/\"、\":\"</string>
+    <string name="tip_barcode_text_CODE128">The number of characters：1-42，range：Arbitrary character</string>
+    <string name="tip_barcode_text_QR_CODE">range：Arbitrary character</string>
+    <string name="tip_barcode_text_ITF14">The Number Of Characters: 14</string>
+    <string name="tip_pls_connect_device">Please connect the printer.</string>
+    <string name="show_conncected_devices">Show Conncected Devices</string>
+    <string name="dialog_title_connected_devlist">Connected Device List</string>
+    <string name="pls_connect_printer_first">Please connect printer first.</string>
+    <string name="adapter_usbdevice">USB Device:</string>
+    <string name="choose_usb_device">Choose USB Device</string>
+    <string name="tip_insert_usb_device">Pls insert USB device</string>
+    <string name="temp1_title1_printer_tech">Printer Tech</string>
+    <string name="temp1_content1_tel">Tel:+8618812345678</string>
+    <string name="temp1_content2_email">Email:surpport@printer_tech.com</string>
+    <string name="wifi_settings">WiFi Settings</string>
+    <string name="refresh_wifi">REFRESH WIFI</string>
+    <string name="wifi_mode">WIFI MODE</string>
+    <string name="ssid">SSID:</string>
+    <string name="pwd">PWD:</string>
+    <string name="confirm_set_this_wifi">CONFIRM SET THIS WIFI</string>
+    <string name="wifi_net_settings_ip_dhcp">WiFi Net Settings(IP,DHCP)</string>
+    <string name="wifi_ip">IP</string>
+    <string name="wifi_dhcp">DHCP</string>
+    <string name="wifi_edit_ip">IP:</string>
+    <string name="wifi_edit_sub_mask">Sub Mask:</string>
+    <string name="wifi_edit_gateway">Gateway:</string>
+    <string name="wifi_edit_dhcp">DHCP:</string>
+    <string name="wifi_dhcp_disable">Disable</string>
+    <string name="wifi_dhcp_enable">Enable</string>
+    <string name="wifi_savechange">Save Change</string>
+    <string name="bmp_limit_width">Limit width\n [In mm]:</string>
+    <string name="please_enter_text">Please enter text.</string>
+    <string name="small_font">Small Font</string>
+    <string name="anti_white">Anti white</string>
+    <string name="double_width">Double Width</string>
+    <string name="double_height">Double Height</string>
+    <string name="bold">Bold</string>
+    <string name="underline">Underline</string>
+    <string name="left">Left</string>
+    <string name="center">Center</string>
+    <string name="right">Right</string>
+    <string name="text_encode">Text Encode:</string>
+    <string name="dialog_title_chartset_setting">Chartset name settings</string>
+    <string name="spin_default_esc_font">Please choose a Font</string>
+    <string name="tv_font_select">Font Choose：</string>
+    <string name="btn_clk_sel_font">Click to choose the printed font</string>
+    <string name="label_setting">Label Setting</string>
+    <string name="save">Save</string>
+    <string name="paper_exit_direction">Paper exit direction:</string>
+    <string name="density_setting">Density Setting:</string>
+    <string name="print_speed">Print Speed:</string>
+    <string name="label_gap">Label Gap:</string>
+    <string name="width_height_mm">(Width*Height mm)</string>
+    <string name="label_size">Label Size:</string>
+    <string name="label_type">Label Type:</string>
+    <string name="offset">Print Offset:</string>
+    <string name="title_size">Size Setting</string>
+    <string name="title_speed">Speed Setting</string>
+    <string name="title_offset">Offset Setting</string>
+    <string name="beeper_test">Beeper Test</string>
+    <string name="cutter_test">Cutter Test</string>
+    <string name="size">Size:</string>
+    <string name="spacing">Spacing:</string>
+    <string name="enlarge">Enlarge:</string>
+    <string name="save_setting">Saved</string>
+    <string name="Print_copys">Number of copies</string>
+    <string name="Print_status">Printer status</string>
+    <string name="title_activity_status_test">StatusTestActivity</string>
+    <string name="status_normal">general state</string>
+    <string name="status_Connect">connection status</string>
+    <string name="status_IsPrint">print status</string>
+    <string name="Print_status_test">Printer status test</string>
+</resources>
+
+
+
+
+
+
+

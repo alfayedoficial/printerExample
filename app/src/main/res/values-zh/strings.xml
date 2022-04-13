@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">打印样例</string>
+    <string name="cmdtype_pin">针打</string>
+    <string name="command_type">指令类型:</string>
+    <string name="disconnect">断开连接</string>
+    <string name="connect">连接</string>
+    <string name="text_print">文本打印</string>
+    <string name="image_print">图片打印</string>
+    <string name="self_test_print">测试页打印</string>
+    <string name="upload_image">上传图片</string>
+    <string name="print">打印</string>
+    <string name="please_connect">未连接打印机[点击选择]</string>
+    <string name="connect_type">连接类型:</string>
+
+
+    <string name="cmdtype_esc">ESC</string>
+    <string name="cmdtype_tsc">TSC</string>
+    <string name="cmdtype_cpcl">CPCL</string>
+    <string name="cmdtype_zpl">ZPL</string>
+
+    <string name="picture">拍照</string>
+    <string name="album">相册</string>
+    <string name="choose_picture_position">图片位置</string>
+    <string name="tip_upload_image">请先选择一张图片</string>
+    <string name="insert_sdcard_tip">未检测到sd卡</string>
+
+    <string name="template_1">模版1</string>
+    <string name="template_2">模版2</string>
+    <string name="template_3">模版3</string>
+    <string name="template_4">模版4</string>
+    <string name="template_print">模版打印</string>
+
+    <string name="choose_bluetooth_device">选择蓝牙设备</string>
+    <string name="paired_devices">已配对的设备</string>
+    <string name="tip_have_no_paired_device">您还没有已配对的设备</string>
+    <string name="tip_have_no_found_bluetooth_device">未在附近找到蓝牙设备</string>
+    <string name="search_device">搜索设备</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_tip">提示</string>
+    <string name="main_pls_choose_device">请先选择一个设备</string>
+    <string name="dialog_back">返回</string>
+    <string name="main_discon_click_repeatedly">设备已断开，无需重复点击</string>
+    <string name="barcode_print">条码打印</string>
+    <string name="headbar_back">返回</string>
+    <string name="title_barcode">条码</string>
+    <string name="_main_connected">-连接成功</string>
+    <string name="_main_disconnect">-已断开连接</string>
+
+    <string name="tip_barcode_text_UPC_A">字符数：11，范围：0~9，自动校验</string>
+    <string name="tip_barcode_text_UPC_E">字符数：6，范围：0~9，自动校验</string>
+    <string name="tip_barcode_text_EAN13">字符数：12，范围：0~9，自动校验</string>
+    <string name="tip_barcode_text_EAN8">字符数：7，范围：0~9，自动校验</string>
+    <string name="tip_barcode_text_CODE39">字符数：1~30，范围：0-9、A~Z、空、\"$\"、\"%\"、\"+\"、\"-\"、\".\"、\"/\"</string>
+    <string name="tip_barcode_text_ITF">字符数：≤ 30(偶数)，范围：0-9</string>
+    <string name="tip_barcode_text_CODABAR">字符数：1-30，范围：0-9、A-D、\"$\"、\"+\"、\"-\"、\".\"、\"/\"、\":\"，A-D仅做起始符和终止符</string>
+    <string name="tip_barcode_text_CODE93">字符数：1-30，范围：0-9、A-D、\"$\"、\"+\"、\"-\"、\".\"、\"/\"、\":\"</string>
+    <string name="tip_barcode_text_CODE128">字符数：1-42，范围：任意字符</string>
+    <string name="tip_barcode_text_QR_CODE">范围：任意字符</string>
+    <string name="tip_barcode_text_ITF14">字符数（仅允许数字）: 14</string>
+    <string name="tip_pls_connect_device">请先连接打印机.</string>
+    <string name="show_conncected_devices">显示已连接列表</string>
+    <string name="dialog_title_connected_devlist">已连接列表</string>
+    <string name="pls_connect_printer_first">请先连接打印机</string>
+    <string name="adapter_usbdevice">USB设备:</string>
+    <string name="choose_usb_device">选择USB设备</string>
+    <string name="tip_insert_usb_device">请插入USB设备</string>
+    <string name="temp1_title1_printer_tech">Printer Tech</string>
+    <string name="temp1_content1_tel">Tel:+8618812345678</string>
+    <string name="temp1_content2_email">Email:surpport@printer_tech.com</string>
+    <string name="wifi_settings">WiFi网络设置</string>
+    <string name="refresh_wifi">刷新</string>
+    <string name="wifi_mode">WiFi模式</string>
+    <string name="ssid">SSID:</string>
+    <string name="pwd">密码:</string>
+    <string name="confirm_set_this_wifi">确认打印机设置该WiFi</string>
+    <string name="wifi_net_settings_ip_dhcp">WiFi设置(IP,DHCP)</string>
+    <string name="wifi_ip">IP</string>
+    <string name="wifi_dhcp">DHCP</string>
+    <string name="wifi_edit_ip">IP:</string>
+    <string name="wifi_edit_sub_mask">Sub Mask:</string>
+    <string name="wifi_edit_gateway">Gateway:</string>
+    <string name="wifi_edit_dhcp">DHCP:</string>
+    <string name="wifi_dhcp_disable">禁用</string>
+    <string name="wifi_dhcp_enable">启用</string>
+    <string name="wifi_savechange">保存设置</string>
+    <string name="bmp_limit_width">宽度限制\n[毫米]:</string>
+    <string name="please_enter_text">请输入文本...</string>
+    <string name="small_font">小字体</string>
+    <string name="anti_white">反白</string>
+    <string name="double_width">倍宽</string>
+    <string name="double_height">倍高</string>
+    <string name="bold">加粗</string>
+    <string name="underline">下划线</string>
+    <string name="left">左对齐</string>
+    <string name="center">居中</string>
+    <string name="right">右对齐</string>
+    <string name="text_encode">文本编码:</string>
+    <string name="dialog_title_chartset_setting">文本编码设置</string>
+    <string name="spin_default_esc_font">请选择字体...</string>
+    <string name="tv_font_select">选择打印字体：</string>
+    <string name="btn_clk_sel_font">点击选择打印字体</string>
+    <string name="label_setting">标签设置</string>
+    <string name="save">保存</string>
+    <string name="paper_exit_direction">出纸方向:</string>
+    <string name="density_setting">浓度设置:</string>
+    <string name="print_speed">打印速度:</string>
+    <string name="label_gap">标签缝隙:</string>
+    <string name="width_height_mm">(宽*高 毫米)</string>
+    <string name="label_size">标签尺寸:</string>
+    <string name="label_type">标签类型:</string>
+    <string name="offset">打印偏移:</string>
+    <string name="title_offset">偏移设置</string>
+    <string name="beeper_test">蜂鸣测试</string>
+    <string name="cutter_test">切刀测试</string>
+    <string name="size">字符尺寸:</string>
+    <string name="spacing">字符间距:</string>
+    <string name="enlarge">字符放大:</string>
+    <string name="save_setting">已保存</string>
+    <string name="Print_copys">打印份数</string>
+    <string name="Print_status">打印机状态</string>
+
+    <string name="status_normal">通用状态</string>
+    <string name="status_Connect">连接状态</string>
+    <string name="status_IsPrint">打印状态</string>
+    <string name="Print_status_test">打印机状态测试</string>
+</resources>
+
+
+
+
+
+
+
+
+

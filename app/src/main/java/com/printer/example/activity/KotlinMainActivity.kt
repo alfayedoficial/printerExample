@@ -551,7 +551,7 @@ class KotlinMainActivity : BaseActivity() , PrinterObserver {
     }
 
     /************* doDisConnect ****************/
-    private fun doDisConnect() {
+    fun doDisConnect() {
         if (dataBinder?.tvDeviceSelected?.tag.toString().toInt() == BaseEnum.NO_DEVICE) { //未选择设备
             //  showAlertDialog(getString(R.string.main_discon_click_repeatedly));
             return

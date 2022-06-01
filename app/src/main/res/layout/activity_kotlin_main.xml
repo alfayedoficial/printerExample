@@ -34,85 +34,6 @@
                 android:orientation="vertical"
                 android:paddingBottom="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:text="@string/command_type" />
-
-                <com.printer.example.view.FlowRadioGroup
-                    android:id="@+id/rgCmdType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rb_cmd_esc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/cmdtype_esc" />
-
-                    <RadioButton
-                        android:id="@+id/rb_cmd_tsc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/cmdtype_tsc" />
-
-                    <RadioButton
-                        android:id="@+id/rb_cmd_cpcl"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/cmdtype_cpcl" />
-
-                    <RadioButton
-                        android:id="@+id/rb_cmd_zpl"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/cmdtype_zpl"
-                        android:visibility="visible" />
-
-                    <RadioButton
-                        android:id="@+id/rb_cmd_pin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:text="@string/cmdtype_pin" />
-                </com.printer.example.view.FlowRadioGroup>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:text="@string/connect_type" />
-
-                <com.printer.example.view.FlowRadioGroup
-                    android:id="@+id/rgConnect"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rbConnectBluetooth"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Bluetooth" />
-
-                </com.printer.example.view.FlowRadioGroup>
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_connected_list"
                     android:layout_width="match_parent"
@@ -175,181 +96,56 @@
                     android:layout_height="2dp"
                     android:layout_marginBottom="10dp"
                     android:background="@color/gray2" />
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnTest"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:text="Test"
-                        android:enabled="false"
-                        android:onClick="@{()->activity.testTsc()}"
-                        android:visibility="gone"/>
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCmdTest"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:text="Cmd Test"
-                        android:onClick="@{()->activity.toBCmdTestActivity()}"
-                        android:enabled="false"
-                        android:visibility="visible"/>
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnLabelSetting"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:text="@string/label_setting"
-                        android:enabled="false"
-                        android:onClick="@{()->activity.toLabelSettingActivity()}"
-                        android:visibility="gone"/>
 
-                </TableRow>
+               <androidx.constraintlayout.widget.ConstraintLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSelfTestPrint"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:onClick="@{() -> activity.selfTestPrint()}"
-                        android:text="@string/self_test_print"
-                        android:enabled="false"/>
+                   <EditText
+                       android:id="@+id/etxtBarCode"
+                       android:layout_width="250dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="10dp"
+                       android:ems="10"
+                       android:inputType="textPersonName"
+                       android:minHeight="48dp"
+                       android:text="barCode"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnTxtPrint"
-                        style="@style/main_activity_button"
-                        android:onClick="@{() -> activity.txtPrint()}"
-                        android:layout_weight="1"
-                        android:text="@string/text_print"
-                        android:enabled="false"/>
+                   <ImageView
+                       android:id="@+id/mgBarCode"
+                       android:layout_width="242dp"
+                       android:layout_height="71dp"
+                       android:layout_marginTop="15dp"
+                       app:layout_constraintEnd_toEndOf="@+id/etxtBarCode"
+                       app:layout_constraintStart_toStartOf="@+id/etxtBarCode"
+                       app:layout_constraintTop_toBottomOf="@+id/etxtBarCode"
+                       tools:srcCompat="@tools:sample/avatars" />
 
-                </TableRow>
+                   <ImageView
+                       android:id="@+id/mgBarCode2"
+                       android:layout_width="342dp"
+                       android:layout_height="150dp"
+                       app:layout_constraintEnd_toEndOf="@+id/etxtBarCode"
+                       app:layout_constraintStart_toStartOf="@+id/etxtBarCode"
+                       app:layout_constraintTop_toBottomOf="@+id/tnGenerate"
+                       tools:srcCompat="@tools:sample/avatars" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                   <Button
+                       android:id="@+id/tnGenerate"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Generate"
+                       android:onClick="@{()->activity.generate(etxtBarCode.getText().toString())}"
+                       android:layout_marginTop="10dp"
+                       app:layout_constraintEnd_toEndOf="@+id/mgBarCode"
+                       app:layout_constraintStart_toStartOf="@+id/mgBarCode"
+                       app:layout_constraintTop_toBottomOf="@+id/mgBarCode" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnImgPrint"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:text="@string/image_print"
-                        android:onClick="@{() -> activity.imagePrint()}"
-                        android:enabled="false"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnBarcodePrint"
-                        style="@style/main_activity_button"
-                        android:onClick="@{() -> activity.toBarcodeActivity()}"
-                        android:layout_weight="1"
-                        android:text="@string/barcode_print"
-                        android:enabled="false"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnTemplatePrint"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:onClick="@{() -> activity.toTemplateActivity()}"
-                        android:text="@string/template_print"
-                        android:enabled="false"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnBeep"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:onClick="@{() -> activity.beepTest()}"
-                        android:text="@string/beeper_test"
-                        android:enabled="false"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAllCut"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:onClick="@{() -> activity.allCutTest()}"
-                        android:text="@string/cutter_test"
-                        android:enabled="false"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCashBox"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:onClick="@{() -> activity.cashBoxTest()}"
-                        android:text="Cashbox Test"
-                        android:enabled="false"/>
-
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnWifiSetting"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:text="WiFi Settings"
-                        android:onClick="@{() -> activity.toWifiSettingActivity()}"
-                        android:enabled="false"/>
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnWifiIpdhcp"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:onClick="@{() -> activity.toWifiIpDhcpSettingActivity()}"
-                        android:text="WiFi IP/DHCP"
-                        android:enabled="false"/>
-
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnPrintStatus"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:onClick="@{() -> activity.getPrintStatus()}"
-                        android:text="@string/Print_status"
-                        android:enabled="false"/>
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnPrintStatus2"
-                        style="@style/main_activity_button"
-                        android:layout_weight="1"
-                        android:text="@string/Print_status_test"
-                        android:visibility="gone"
-                        android:enabled="false"/>
-                </TableRow>
+               </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
 

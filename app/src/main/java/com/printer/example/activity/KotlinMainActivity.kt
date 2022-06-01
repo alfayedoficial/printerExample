@@ -4,12 +4,16 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.pm.PackageManager
+import android.graphics.*
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
 import com.printer.example.R
 import com.printer.example.app.BaseActivity
 import com.printer.example.app.BaseApplication
@@ -23,9 +27,11 @@ import com.printer.example.utils.TonyUtils
 import com.rt.printerlibrary.bean.BluetoothEdrConfigBean
 import com.rt.printerlibrary.cmd.*
 import com.rt.printerlibrary.connect.PrinterInterface
+import com.rt.printerlibrary.enumerate.BmpPrintMode
 import com.rt.printerlibrary.enumerate.CommonEnum
 import com.rt.printerlibrary.enumerate.ConnectStateEnum
 import com.rt.printerlibrary.enumerate.PrinterAskStatusEnum
+import com.rt.printerlibrary.exception.SdkException
 import com.rt.printerlibrary.factory.cmd.CmdFactory
 import com.rt.printerlibrary.factory.connect.BluetoothFactory
 import com.rt.printerlibrary.factory.connect.PIFactory
@@ -34,23 +40,30 @@ import com.rt.printerlibrary.factory.printer.ThermalPrinterFactory
 import com.rt.printerlibrary.observer.PrinterObserver
 import com.rt.printerlibrary.observer.PrinterObserverManager
 import com.rt.printerlibrary.printer.RTPrinter
+import com.rt.printerlibrary.setting.BitmapSetting
+import com.rt.printerlibrary.setting.CommonSetting
 import com.rt.printerlibrary.utils.FuncUtils
 import com.rt.printerlibrary.utils.PrintStatusCmd
 import com.rt.printerlibrary.utils.PrinterStatusPareseUtils
 import java.io.UnsupportedEncodingException
 
-const  val SP_KEY_PORT = "port"
 const  val TAG = "TAG_TEST"
-const val SP_KEY_IP = "ip"
 const val REQUEST_CAMERA = 0
 
 class KotlinMainActivity : BaseActivity() , PrinterObserver {
+
+    private var bmpPrintWidth = 40
 
     private var dataBinder : ActivityKotlinMainBinding? = null
     private val needPermission = arrayOf(
         Manifest.permission.CAMERA,
         Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.BLUETOOTH_CONNECT,
+        Manifest.permission.BLUETOOTH_PRIVILEGED,
+        Manifest.permission.BLUETOOTH,
+        Manifest.permission.BLUETOOTH_SCAN,
+
     )
     private val noPermission: ArrayList<String> = ArrayList()
 
@@ -102,97 +115,20 @@ class KotlinMainActivity : BaseActivity() , PrinterObserver {
         Log.i(TAG, "initView")
     }
 
-    override fun addListener() {
-
-        radioButtonCheckListener() //single button listener
-
-        dataBinder?.apply {
-            rgCmdType.check(R.id.rb_cmd_esc)
-            rgConnect.check(R.id.rb_connect_bluetooth)
-        }
-    }
-
-    private fun radioButtonCheckListener() {
-        dataBinder?.apply {
-//            rgCmdType.setOnCheckedChangeListener { _, i ->
-//                when (i) {
-//                    R.id.rb_cmd_pin -> {
-//                        BaseApplication.instance.currentCmdType = BaseEnum.CMD_PIN
-//                        printerFactory = PinPrinterFactory()
-//                        rtPrinter = printerFactory?.create()
-//                        rtPrinter?.setPrinterInterface(curPrinterInterface)
-//                        btnBarcodePrint.visibility = View.GONE
-//                        btnLabelSetting.visibility = View.GONE
-//                    }
-//                    R.id.rb_cmd_esc -> {
-//                        BaseApplication.instance.currentCmdType = BaseEnum.CMD_ESC
-//                        printerFactory = ThermalPrinterFactory()
-//                        rtPrinter = printerFactory?.create()
-//                        rtPrinter?.setPrinterInterface(curPrinterInterface)
-//                        btnBarcodePrint.visibility = View.VISIBLE
-//                        btnLabelSetting.visibility = View.GONE
-//                    }
-//                    R.id.rb_cmd_tsc -> {
-//                        BaseApplication.instance.currentCmdType = BaseEnum.CMD_TSC
-//                        printerFactory = LabelPrinterFactory()
-//                        rtPrinter = printerFactory?.create()
-//                        rtPrinter?.setPrinterInterface(curPrinterInterface)
-//                        btnBarcodePrint.visibility = View.VISIBLE
-//                        btnLabelSetting.visibility = View.GONE
-//                    }
-//                    R.id.rb_cmd_cpcl -> {
-//                        BaseApplication.instance.currentCmdType = BaseEnum.CMD_CPCL
-//                        printerFactory = LabelPrinterFactory()
-//                        rtPrinter = printerFactory?.create()
-//                        rtPrinter?.setPrinterInterface(curPrinterInterface)
-//                        btnBarcodePrint.visibility = View.VISIBLE
-//                        btnLabelSetting.visibility = View.VISIBLE
-//                    }
-//                    R.id.rb_cmd_zpl -> {
-//                        BaseApplication.instance.currentCmdType = BaseEnum.CMD_ZPL
-//                        printerFactory = LabelPrinterFactory()
-//                        rtPrinter = printerFactory?.create()
-//                        rtPrinter?.setPrinterInterface(curPrinterInterface)
-//                        btnBarcodePrint.visibility = View.VISIBLE
-//                        btnLabelSetting.visibility = View.GONE
-//                    }
-//                }
-//                BaseApplication.getInstance().rtPrinter = rtPrinter
-//            }
-
-            rgConnect.setOnCheckedChangeListener { _, i ->
-                doDisConnect()
-                when (i) {
-                    R.id.rbConnectBluetooth -> checkedConType = BaseEnum.CON_BLUETOOTH
-                }
-            }
-        }
-    }
+    override fun addListener() {}
 
     override fun init() {
         dataBinder?.apply {
 
             //printer
-            btnPrintStatus2.visibility = View.GONE
             BaseApplication.instance.currentCmdType = BaseEnum.CMD_ESC
             printerFactory = ThermalPrinterFactory()
             rtPrinterKotlin = printerFactory?.create() as RTPrinter<BluetoothEdrConfigBean>?
             rtPrinterKotlin?.setPrinterInterface(curPrinterInterface)
-            btnBarcodePrint.visibility = View.VISIBLE
-            btnLabelSetting.visibility = View.GONE
             BaseApplication.getInstance().rtPrinter = rtPrinterKotlin;
 
             tvVer.text = "PrinterExample Ver: v" + TonyUtils.getVersionName(this@KotlinMainActivity)
             PrinterObserverManager.getInstance().add(this@KotlinMainActivity)
-
-
-            if (BaseApplication.getInstance().currentCmdType == BaseEnum.CMD_PIN) {
-                btnBarcodePrint.visibility = View.GONE
-            } else {
-                btnBarcodePrint.visibility = View.VISIBLE
-            }
-
-            btnLabelSetting.isEnabled = true //TODO
 
         }
     }
@@ -254,210 +190,11 @@ class KotlinMainActivity : BaseActivity() , PrinterObserver {
     }
 
 
-    /*********** selfTestPrint ************/
-    fun selfTestPrint() {
-        when (BaseApplication.getInstance().currentCmdType) {
-            BaseEnum.CMD_PIN -> pinSelfTestPrint()
-            BaseEnum.CMD_ESC -> escSelfTestPrint()
-            BaseEnum.CMD_TSC -> tscSelfTestPrint()
-            BaseEnum.CMD_CPCL -> cpclSelfTestPrint()
-            BaseEnum.CMD_ZPL -> zplSelfTestPrint()
-            else -> {}
-        }
-    }
-
-    private fun cpclSelfTestPrint() {
-        val cmdFactory: CmdFactory = CpclFactory()
-        val cmd = cmdFactory.create()
-        // cmd.append(cmd.getCpclHeaderCmd(80,60,1));
-        cmd.append(cmd.selfTestCmd)
-        rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-    }
-
-    private fun zplSelfTestPrint() {
-        val cmdFactory: CmdFactory = ZplFactory()
-        val cmd = cmdFactory.create()
-        cmd.append(cmd.headerCmd)
-        cmd.append(cmd.selfTestCmd)
-        cmd.append(cmd.endCmd)
-        rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-    }
-
-    private fun tscSelfTestPrint() {
-        val cmdFactory: CmdFactory = TscFactory()
-        val cmd = cmdFactory.create()
-        cmd.append(cmd.headerCmd)
-        cmd.append(cmd.lfcrCmd)
-        cmd.append(cmd.lfcrCmd)
-        cmd.append(cmd.selfTestCmd)
-        rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-    }
-
-    private fun escSelfTestPrint() {
-        val cmdFactory: CmdFactory = EscFactory()
-        val cmd = cmdFactory.create()
-        cmd.append(cmd.headerCmd)
-        cmd.append(cmd.lfcrCmd)
-        cmd.append(cmd.selfTestCmd)
-        cmd.append(cmd.lfcrCmd)
-        rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-    }
-
-    private fun pinSelfTestPrint() {
-        val cmdFactory: CmdFactory = PinFactory()
-        val cmd = cmdFactory.create()
-        cmd.append(cmd.headerCmd)
-        cmd.append(cmd.lfcrCmd)
-        cmd.append(cmd.lfcrCmd)
-        cmd.append(cmd.selfTestCmd)
-        rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-    }
-
-    /************* textPrint ****************/
-    fun txtPrint() {
-        try {
-            textPrint()
-        } catch (e: UnsupportedEncodingException) {
-            e.printStackTrace()
-        }
-    }
-
-    @Throws(UnsupportedEncodingException::class)
-    private fun textPrint() {
-        when (BaseApplication.getInstance().currentCmdType) {
-            BaseEnum.CMD_ESC -> turn2Activity(
-                TextPrintESCActivity::class.java
-            )
-            else -> turn2Activity(TextPrintActivity::class.java)
-        }
-    }
-
-
     /************* imagePrint ****************/
     fun imagePrint() {
 //        turn2Activity(ImagePrintActivity::class.java)
         turn2Activity(KotlinImageActivity::class.java)
     }
-
-    /************* toTemplateActivity ****************/
-    fun toTemplateActivity() {
-        turn2Activity(TempletPrintActivity::class.java)
-    }
-
-    /************* toBarcodeActivity ****************/
-    fun toBarcodeActivity() {
-        turn2Activity(BarcodeActivity::class.java)
-    }
-
-    /************* toWifiSettingActivity ****************/
-    fun toWifiSettingActivity() {
-        turn2Activity(WifiSettingActivity::class.java)
-    }
-
-    /************* toWifiIpDhcpSettingActivity ****************/
-    fun toWifiIpDhcpSettingActivity() {
-        turn2Activity(WifiIpDhcpSettingActivity::class.java)
-    }
-
-    /************* toBCmdTestActivity ****************/
-    fun toBCmdTestActivity() {
-        turn2Activity(CmdTestActivity::class.java)
-    }
-
-    /************* toLabelSettingActivity ****************/
-    fun toLabelSettingActivity() {
-        turn2Activity(LabelSettingActivity::class.java)
-    }
-
-    /************* testTsc ****************/
-    fun testTsc() {
-        if (rtPrinterKotlin == null) {
-            return
-        }
-        TonyUtils.Tsc_InitLabelPrint(rtPrinterKotlin)
-        val strPrintTxt = TonyUtils.printText("80", "80", "TSS24.BF2", "0", "1", "1", "Hello,容大!")
-        val strPrint = TonyUtils.setPRINT("1", "1")
-        try {
-            rtPrinterKotlin!!.writeMsg(strPrintTxt.toByteArray(charset("GBK")))
-        } catch (e: UnsupportedEncodingException) {
-            e.printStackTrace()
-        }
-        rtPrinterKotlin!!.writeMsg(strPrint.toByteArray())
-    }
-
-    /************* getPrintStatus ****************/
-    fun getPrintStatus() {
-        if(BaseApplication.getInstance().currentConnectType == BaseEnum.CON_USB) {
-            val cmdFactory = EscFactory()
-            val cmd = cmdFactory.create()
-            cmd.append(cmd.getPrinterStatus(PrinterAskStatusEnum.Paper_status))
-            rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-            val msgBytes = rtPrinterKotlin!!.readMsg()
-            if (msgBytes.isNotEmpty()) ToastUtil.show(this, msgBytes[0].toString()) else ToastUtil.show(this, "fail")
-        }
-    }
-
-    /************* cashBoxTest ****************/
-    fun cashBoxTest() {
-        when (BaseApplication.getInstance().currentCmdType) {
-            BaseEnum.CMD_ESC -> if (rtPrinterKotlin != null) {
-                val cmdFactory: CmdFactory = EscFactory()
-                val cmd = cmdFactory.create()
-                cmd.append(cmd.openMoneyBoxCmd) //Open cashbox use default setting[0x00,0x20,0x01]
-
-                //or custom settings
-//                    byte drawNumber = 0x00;
-//                    byte startTime = 0x05;
-//                    byte endTime = 0x00;
-//                    cmd.append(cmd.getOpenMoneyBoxCmd(drawNumber, startTime, endTime));
-                Log.e("Fuuu", FuncUtils.ByteArrToHex(cmd.appendCmds))
-                rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-            }
-            else -> if (rtPrinterKotlin != null) {
-                val cmdFactory: CmdFactory = EscFactory()
-                val cmd = cmdFactory.create()
-                cmd.append(cmd.openMoneyBoxCmd) //Open cashbox
-                rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-            }
-        }
-    }
-
-    /************* allCutTest ****************/
-    fun allCutTest() {
-        when (BaseApplication.getInstance().currentCmdType) {
-            BaseEnum.CMD_ESC -> if (rtPrinterKotlin != null) {
-                val cmdFactory: CmdFactory = EscFactory()
-                val cmd = cmdFactory.create()
-                cmd.append(cmd.allCutCmd)
-                rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-            }
-            else -> if (rtPrinterKotlin != null) {
-                val cmdFactory: CmdFactory = EscFactory()
-                val cmd = cmdFactory.create()
-                cmd.append(cmd.allCutCmd)
-                rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-            }
-        }
-    }
-
-    /************* beepTest ****************/
-    fun beepTest() {
-        when (BaseApplication.getInstance().currentCmdType) {
-            BaseEnum.CMD_ESC -> if (rtPrinterKotlin != null) {
-                val cmdFactory: CmdFactory = EscFactory()
-                val cmd = cmdFactory.create()
-                cmd.append(cmd.beepCmd)
-                rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-            }
-            else -> if (rtPrinterKotlin != null) {
-                val cmdFactory: CmdFactory = EscFactory()
-                val cmd = cmdFactory.create()
-                cmd.append(cmd.beepCmd)
-                rtPrinterKotlin!!.writeMsgAsync(cmd.appendCmds)
-            }
-        }
-    }
-
 
 
     /*********************************************************************************************/
@@ -496,24 +233,8 @@ class KotlinMainActivity : BaseActivity() , PrinterObserver {
     /************* setPrintEnable ****************/
     private fun setPrintEnable(isEnable: Boolean) {
         dataBinder?.apply {
-            btnSelfTestPrint.isEnabled = isEnable
-            btnTxtPrint.isEnabled = isEnable
-            btnImgPrint.isEnabled = isEnable
-            btnTemplatePrint.isEnabled = isEnable
-            btnBarcodePrint.isEnabled = isEnable
             btnConnect.isEnabled = !isEnable
             btnDisConnect.isEnabled = isEnable
-            btnBeep.isEnabled = isEnable
-            btnAllCut.isEnabled = isEnable
-            btnCashBox.isEnabled = isEnable
-            btnWifiSetting.isEnabled = isEnable
-            btnWifiIpdhcp.isEnabled = isEnable
-            btnCmdTest.isEnabled = isEnable
-            btnTest.isEnabled = isEnable
-            // btn_label_setting.setEnabled(isEnable);
-            // btn_label_setting.setEnabled(isEnable);
-            btnPrintStatus.isEnabled = isEnable
-            btnPrintStatus2.isEnabled = isEnable
         }
     }
 
@@ -609,6 +330,124 @@ class KotlinMainActivity : BaseActivity() , PrinterObserver {
             }
         }
         return isInList
+    }
+
+    fun generate(barCode :String){
+        val multiFormatWriter = MultiFormatWriter()
+        try {
+            val bitMatrix = multiFormatWriter.encode(
+                barCode,
+                BarcodeFormat.CODE_128,
+                dataBinder?.mgBarCode!!.width,
+                dataBinder?.mgBarCode!!.height
+            )
+            val bitmap = Bitmap.createBitmap(dataBinder?.mgBarCode!!.width, dataBinder?.mgBarCode!!.height, Bitmap.Config.RGB_565)
+            for (i in 0 until dataBinder?.mgBarCode!!.width) {
+                for (j in 0 until dataBinder?.mgBarCode!!.height) {
+                    bitmap.setPixel(i, j, if (bitMatrix[i, j]) Color.BLACK else Color.WHITE)
+                }
+            }
+
+            convert(bitmap)
+        } catch (e: WriterException) {
+            e.printStackTrace()
+        }catch (e : SdkException){
+            e.printStackTrace()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+    @Throws(SdkException::class)
+    private fun print(mBitmap : Bitmap?) {
+        if (mBitmap == null) { //未选择图片
+            ToastUtil.show(this, R.string.tip_upload_image)
+            return
+        }
+        escPrint(mBitmap)
+    }
+
+    @Throws(SdkException::class)
+    private fun escPrint(mBitmap : Bitmap) {
+        Thread {
+                showProgressDialog("Loading...")
+            val cmdFactory: CmdFactory = EscFactory()
+            val cmd = cmdFactory.create()
+            cmd.append(cmd.headerCmd)
+            val commonSetting = CommonSetting()
+            //  commonSetting.setAlign(CommonEnum.ALIGN_MIDDLE);
+            cmd.append(cmd.getCommonSettingCmd(commonSetting))
+            val bitmapSetting = BitmapSetting()
+
+            bitmapSetting.bmpPrintMode = BmpPrintMode.MODE_SINGLE_COLOR
+            //                bitmapSetting.setBmpPrintMode(BmpPrintMode.MODE_MULTI_COLOR);
+
+
+//                if (bmpPrintWidth > 72) {
+//                    bmpPrintWidth = 72;
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            et_pic_width.setText(bmpPrintWidth + "");
+//                        }
+//                    });
+//                }
+            bitmapSetting.bimtapLimitWidth = bmpPrintWidth * 8
+            try {
+                cmd.append(cmd.getBitmapCmd(bitmapSetting, mBitmap))
+            } catch (e: SdkException) {
+                e.printStackTrace()
+            }
+            cmd.append(cmd.lfcrCmd)
+            cmd.append(cmd.lfcrCmd)
+            cmd.append(cmd.lfcrCmd)
+            cmd.append(cmd.lfcrCmd)
+            cmd.append(cmd.lfcrCmd)
+            cmd.append(cmd.lfcrCmd)
+            if (rtPrinterKotlin != null) {
+                rtPrinterKotlin?.writeMsg(cmd.appendCmds) //Sync Write
+            }
+            hideProgressDialog()
+        }.start()
+
+
+        //将指令保存到bin文件中，路径地址为sd卡根目录
+//        final byte[] btToFile = cmd.getAppendCmds();
+//        TonyUtils.createFileWithByte(btToFile, "Esc_imageCmd.bin");
+//        TonyUtils.saveFile(FuncUtils.ByteArrToHex(btToFile), "Esc_imageHex");
+    }
+
+    fun convert(mBitmap: Bitmap) {
+
+        val width = 500
+        val height = 220
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        val paint = Paint()
+        paint.color = Color.WHITE
+        paint.style = Paint.Style.FILL
+        canvas.drawPaint(paint)
+
+
+        val startX: Int = (canvas.width - mBitmap.width) / 2 //for horisontal position
+        val startY: Int = (canvas.height - mBitmap.height) / 2 //for vertical position
+
+        canvas.drawBitmap(mBitmap , startX.toFloat(), 0f, paint)
+
+        paint.color = Color.BLACK
+        paint.isAntiAlias = true
+        paint.textSize = 25f
+        paint.textAlign = Paint.Align.CENTER
+        paint.typeface = Typeface.create("Arial", Typeface.BOLD)
+        canvas.drawText("512233111655", width / 2f, 150f, paint)
+        canvas.drawText("name: Car", width / 2f, 180f, paint)
+        canvas.drawText("250 L.E", width / 2f, 215f, paint)
+
+
+        dataBinder?.mgBarCode2!!.setImageBitmap(bitmap)
+
+        print(bitmap)
     }
 
 
